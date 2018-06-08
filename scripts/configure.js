@@ -96,11 +96,14 @@ function writeConfig(config) {
 }
 
 function scriptText(osName, lldbExe) {
-  let lib = 'llnode.so';
-  if (osName === 'Darwin') { lib = 'llnode.dylib'; }
-  if (osName === 'Windows_NT') {
+  let lib;
+  if (osName === 'Darwin') {
+    lib = 'llnode.dylib';
+  } else if (osName === 'Windows_NT') {
     lib = 'llnode.dll';
     lldbExe = lldbExe.replace(/\\/g, '\\\\');
+  } else {
+    lib = 'llnode.so';
   }
 
   return `#!/usr/bin/env node

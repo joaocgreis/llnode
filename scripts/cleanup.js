@@ -4,11 +4,13 @@ const fs = require('fs');
 const cwd = process.cwd();
 const osName = require('os').type();
 
-let libExt = 'so';
+let libExt;
 if (osName === 'Darwin') {
   libExt = 'dylib';
 } else if (osName === 'Windows_NT') {
   libExt = 'dll';
+} else {
+  libExt = 'so';
 }
 const llnodeLib = `plugin.${libExt}`;
 const destLib = `llnode.${libExt}`;
